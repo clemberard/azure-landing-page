@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neon Arena - L'Ultime Expérience Gaming</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <!-- ScrollTrigger pour animations au scroll -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #0d0d2b 0%, #2a0a4e 100%);
+      overflow-x: hidden;
+      font-family: 'Arial', sans-serif;
+    }
+    .neon-text {
+      text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 40px #0ff;
+    }
+    .neon-border {
+      box-shadow: 0 0 15px #f0f, 0 0 30px #f0f;
+    }
+    .glitch {
+      position: relative;
+      color: #fff;
+    }
+    .glitch:before, .glitch:after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .glitch:before {
+      color: #f0f;
+      left: 2px;
+      text-shadow: -2px 0 #f0f;
+      animation: glitch-anim 2s infinite linear alternate-reverse;
+    }
+    .glitch:after {
+      color: #0ff;
+      left: -2px;
+      text-shadow: 2px 0 #0ff;
+      animation: glitch-anim 1.5s infinite linear alternate-reverse;
+    }
+    @keyframes glitch-anim {
+      0% { clip-path: polygon(0 0, 100% 0, 100% 20%, 0 20%); }
+      20% { clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%); }
+      40% { clip-path: polygon(0 40%, 100% 40%, 100% 60%, 0 60%); }
+      60% { clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%); }
+      80% { clip-path: polygon(0 80%, 100% 80%, 100% 100%, 0 100%); }
+      100% { clip-path: polygon(0 0, 100% 0, 100% 20%, 0 20%); }
+    }
+    .particle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: #0ff;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .carousel-item {
+      transition: transform 0.5s ease, opacity 0.5s ease;
+    }
+    .carousel-item.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .carousel-item:not(.active) {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+  </style>
+</head>
+<body class="min-h-screen text-white">
+  <!-- Header -->
+  <header class="w-full max-w-7xl mx-auto text-center py-16">
+    <h1 class="text-5xl md:text-8xl font-bold neon-text glitch" data-text="NEON ARENA">NEON ARENA</h1>
+    <p class="mt-4 text-xl md:text-2xl text-gray-300">L'Expérience Gaming du Futur Vous Attend</p>
+    <button id="cta-button" class="mt-8 px-8 py-4 bg-transparent border-2 border-cyan-400 text-cyan-400 rounded-full text-lg font-bold hover:bg-cyan-400 hover:text-black transition-all duration-300 neon-border">Rejoindre la Bataille</button>
+  </header>
+
+  <!-- Features Section -->
+  <section class="w-full max-w-7xl mx-auto py-16 px-4">
+    <h2 class="text-4xl md:text-5xl font-semibold neon-text text-center mb-12">Pourquoi Neon Arena ?</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="p-8 bg-gray-900 bg-opacity-50 rounded-lg neon-border hover:scale-105 transition-transform duration-300">
+        <h3 class="text-2xl font-bold neon-text">Graphismes 8K Immersifs</h3>
+        <p class="mt-4 text-gray-400">Plongez dans des mondes visuels d'une clarté époustouflante, optimisés pour les écrans de demain.</p>
+      </div>
+      <div class="p-8 bg-gray-900 bg-opacity-50 rounded-lg neon-border hover:scale-105 transition-transform duration-300">
+        <h3 class="text-2xl font-bold neon-text">Gameplay Sans Latence</h3>
+        <p class="mt-4 text-gray-400">Une technologie de pointe pour des réactions instantanées et une fluidité inégalée.</p>
+      </div>
+      <div class="p-8 bg-gray-900 bg-opacity-50 rounded-lg neon-border hover:scale-105 transition-transform duration-300">
+        <h3 class="text-2xl font-bold neon-text">Univers Connecté</h3>
+        <p class="mt-4 text-gray-400">Rejoignez une communauté mondiale, formez des alliances et dominez les classements.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Game Universe Section with Carousel -->
+  <section class="w-full max-w-7xl mx-auto py-16 px-4 bg-gray-900 bg-opacity-50 neon-border">
+    <h2 class="text-4xl md:text-5xl font-semibold neon-text text-center mb-12">Découvrez l'Univers</h2>
+    <div class="relative overflow-hidden">
+      <div id="carousel" class="flex">
+        <div class="carousel-item min-w-full">
+          <h3 class="text-3xl font-bold neon-text">Cité Cybernétique</h3>
+          <p class="mt-4 text-gray-400">Explorez une métropole futuriste où chaque coin cache des défis épiques.</p>
+        </div>
+        <div class="carousel-item min-w-full">
+          <h3 class="text-3xl font-bold neon-text">Terres Désolées</h3>
+          <p class="mt-4 text-gray-400">Survivez dans un monde post-apocalyptique rempli de dangers et de mystères.</p>
+        </div>
+        <div class="carousel-item min-w-full">
+          <h3 class="text-3xl font-bold neon-text">Arène Cosmique</h3>
+          <p class="mt-4 text-gray-400">Affrontez des adversaires dans des batailles spatiales à couper le souffle.</p>
+        </div>
+      </div>
+      <button id="prev-btn" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-cyan-400 text-black px-4 py-2 rounded-full">←</button>
+      <button id="next-btn" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-cyan-400 text-black px-4 py-2 rounded-full">→</button>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="w-full max-w-7xl mx-auto py-16 px-4">
+    <h2 class="text-4xl md:text-5xl font-semibold neon-text text-center mb-12">Ce que disent les joueurs</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="p-6 bg-gray-900 bg-opacity-50 rounded-lg neon-border">
+        <p class="text-gray-300 italic">"Neon Arena a redéfini ma vision du gaming. Les graphismes sont fous !"</p>
+        <p class="mt-4 text-cyan-400 font-bold">- CyberGamer42</p>
+      </div>
+      <div class="p-6 bg-gray-900 bg-opacity-50 rounded-lg neon-border">
+        <p class="text-gray-300 italic">"La communauté est incroyable, et le gameplay est tellement fluide !"</p>
+        <p class="mt-4 text-cyan-400 font-bold">- StarBlazerX</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Signup Section -->
+  <section class="w-full max-w-7xl mx-auto py-16 px-4 text-center">
+    <h2 class="text-4xl md:text-5xl font-semibold neon-text mb-8">Inscrivez-vous maintenant</h2>
+    <div class="max-w-md mx-auto">
+      <input type="email" placeholder="Votre email" class="w-full p-4 mb-4 bg-gray-900 bg-opacity-50 border-2 border-cyan-400 text-white rounded-full neon-border" />
+      <button class="w-full px-8 py-4 bg-cyan-400 text-black rounded-full text-lg font-bold hover:bg-cyan-500 transition-all duration-300 neon-border">S'inscrire</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="w-full bg-gray-900 bg-opacity-50 py-10 text-center">
+    <div class="max-w-7xl mx-auto">
+      <p class="text-gray-400">© 2025 Neon Arena. Tous droits réservés.</p>
+      <div class="mt-4 flex justify-center space-x-6">
+        <a href="#" class="text-cyan-400 hover:text-cyan-200">Twitter</a>
+        <a href="#" class="text-cyan-400 hover:text-cyan-200">Discord</a>
+        <a href="#" class="text-cyan-400 hover:text-cyan-200">YouTube</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Register ScrollTrigger
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Animations for header
+    gsap.from("h1", { duration: 1.5, y: -100, opacity: 0, ease: "power2.out" });
+    gsap.from("header p", { duration: 1.5, opacity: 0, delay: 0.5 });
+    gsap.from("#cta-button", { duration: 1, scale: 0, ease: "back.out(1.7)", delay: 1 });
+
+    // Scroll-triggered animations for sections
+    gsap.utils.toArray(".neon-border").forEach((element) => {
+      gsap.from(element, {
+        scrollTrigger: {
+          trigger: element,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        ease: "power2.out",
+      });
+    });
+
+    // Particle effect on button hover
+    const button = document.getElementById("cta-button");
+    button.addEventListener("mousemove", (e) => {
+      for (let i = 0; i < 3; i++) {
+        const particle = document.createElement("div");
+        particle.classList.add("particle");
+        document.body.appendChild(particle);
+        const rect = button.getBoundingClientRect();
+        particle.style.left = `${e.clientX - rect.left}px`;
+        particle.style.top = `${e.clientY - rect.top}px`;
+        gsap.to(particle, {
+          x: () => Math.random() * 100 - 50,
+          y: () => Math.random() * 100 - 50,
+          opacity: 0,
+          duration: 1,
+          onComplete: () => particle.remove(),
+        });
+      }
+    });
+
+    // Carousel logic
+    const carousel = document.getElementById("carousel");
+    const items = carousel.querySelectorAll(".carousel-item");
+    const prevBtn = document.getElementById("prev-btn");
+    const nextBtn = document.getElementById("next-btn");
+    let currentIndex = 0;
+
+    function showSlide(index) {
+      items.forEach((item, i) => {
+        item.classList.toggle("active", i === index);
+      });
+    }
+
+    nextBtn.addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % items.length;
+      showSlide(currentIndex);
+    });
+
+    prevBtn.addEventListener("click", () => {
+      currentIndex = (currentIndex - 1 + items.length) % items.length;
+      showSlide(currentIndex);
+    });
+
+    // Auto-play carousel
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % items.length;
+      showSlide(currentIndex);
+    }, 5000);
+
+    showSlide(currentIndex);
+  </script>
+</body>
+</html>
