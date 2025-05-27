@@ -1,0 +1,5 @@
+{
+    "scripts": {
+        "build:azure": "open index.html"
+    }
+}
