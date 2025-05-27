@@ -1,6 +1,7 @@
 {
     "scripts": {
         "deploy:azure": "az webapp up --location westeurope --name neonarena --resource-group TP",
-        "build:azure": "npm run build && npm run deploy:azure"
+        "build:azure": "npm run build && npm run deploy:azure",
+        "build": "npm run index.html"
     }
 }
