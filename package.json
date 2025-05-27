@@ -1,8 +1,18 @@
 {
+    "name": "neonarena",
+    "version": "1.0.0",
+    "description": "A minimal React application in a single HTML file for Azure deployment",
+    "main": "index.html",
     "scripts": {
-        "deploy:azure": "az webapp up --location westeurope --name neonarena --resource-group TP",
-        "build:azure": "npm run build && npm run deploy:azure",
-        "build": "npm run production",
-        "production": "npx serve -s ."
+      "start": "serve -s .",
+      "build": "mkdir -p build && cp index.html build/",
+      "deploy": "az staticwebapp up --name my-react-app --resource-group myResourceGroup --source . --output-location build"
+    },
+    "dependencies": {
+      "serve": "^14.2.3"
+    },
+    "devDependencies": {},
+    "engines": {
+      "node": ">=18.x"
     }
-}
+  }
