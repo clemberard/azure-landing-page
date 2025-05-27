@@ -1,6 +1,5 @@
 {
     "scripts": {
-        "build:azure": "xdg-open index.html",
         "deploy:azure": "az webapp up --location westeurope --name neonarena --resource-group TP"
     }
 }
