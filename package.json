@@ -1,12 +1,12 @@
 {
     "name": "neonarena",
     "version": "1.0.0",
-    "description": "A minimal React application in a single HTML file for Azure deployment",
+    "description": "A minimal React landing page in a single HTML file for Azure Static Web Apps",
     "main": "index.html",
     "scripts": {
       "start": "serve -s .",
       "build": "mkdir -p build && cp index.html build/",
-      "deploy": "az staticwebapp up --name my-react-app --resource-group myResourceGroup --source . --output-location build"
+      "test": "echo \"No tests specified\" && exit 0"
     },
     "dependencies": {
       "serve": "^14.2.3"
